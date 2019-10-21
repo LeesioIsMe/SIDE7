@@ -1,0 +1,370 @@
+.head-bg {
+    background: rgb(249, 249, 249);
+}
+
+.header {
+    width: 1200px;
+    height: 37px;
+    margin: 0 auto;
+    /* border:1px solid red; */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: darkred;
+}
+
+.clearfix::after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+.header a {
+    color: rgb(164, 164, 164);
+}
+
+.header a:hover {
+    color: darkred;
+}
+
+.header .right>ul, .header .left>ul {
+    display: flex;
+    font-size: 12px;
+}
+
+.header .left {
+    float: left;
+    position: relative;
+}
+
+.header .right {
+    float: right;
+    position: relative;
+}
+
+.header li {
+    padding: 0 8px;
+    line-height: 37px;
+    position: relative;
+}
+
+.header li:before {
+    content: "|";
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: rgb(164, 164, 164);
+}
+
+.left li:last-child::before, .right li:first-child::before, .right li:last-child::before, .right .mobile-version::before, .right .cust-service-hide li::before {
+    content: "";
+}
+
+.right a {
+    display: inline-block;
+}
+
+.header .right .cust-service-hide {
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    left: 152px;
+    z-index: 300;
+    border: 1px solid rgb(245, 245, 245);
+    border-top: none;
+    font-size: 12px;
+    background: #fff;
+    display: none;
+    padding: 0 0 10px 3px;
+    border-radius: 0 0 10px 10px;
+}
+
+.header .right .cust-service-hide .cust-service a, .header .right .cust-service-hide a:hover {
+    color: darkred;
+}
+
+.header .right .cust-service-hide a {
+    color: #585858;
+}
+
+.cust-service a, .site-nav a, .mobile-version a {
+    padding-right: 15px;
+    position: relative;
+}
+
+.cust-service a::before, .site-nav a::before, .mobile-version a::before {
+    content: "";
+    display: block;
+    border-top: 4px solid rgb(119, 119, 119);
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid transparent;
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+}
+
+.right .shop-car {
+    background: rgb(242, 242, 242);
+}
+
+.right .shop-car a {
+    position: relative;
+    padding: 0 10px;
+}
+
+.right .shop-car a:before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 10px;
+    top: 11px;
+}
+
+.right .shop-car-hide {
+    border: 1px solid rgb(245, 245, 245);
+    border-top: none;
+    text-align: center;
+    width: 460px;
+    position: absolute;
+    top: 37px;
+    right: -1px;
+    padding: 20px 0;
+    z-index: 300;
+    font-size: 14px;
+    background: #fff;
+    display: none;
+}
+
+.right .shop-car-hide .shop-car {
+    position: absolute;
+    top: -38px;
+    right: -1px;
+    background: #fff;
+    border: 1px solid rgb(245, 245, 245);
+    border-bottom: none;
+    border-top: none;
+}
+
+.right .shop-car-hide .shop-car a {
+    font-size: 12px;
+    color: darkred;
+}
+
+.right .shop-car-hide span {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-image: url(../images/icon.png);
+    background-position: 0 -165px;
+}
+
+.right .shop-car-hide p {
+    margin-top: 16px;
+    font-size: 16px;
+    color: rgb(164, 164, 164);
+}
+
+.right .shop-car-hide .goshop {
+    display: inline-block;
+    width: 148px;
+    height: 38px;
+    line-height: 38px;
+    color: rgb(58, 58, 58);
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 2px;
+    margin-top: 20px;
+}
+
+.right .shop-car-hide .goshop:hover {
+    border: 1px solid darkred;
+    color: darkred;
+}
+
+.content {
+    width: 1200px;
+    margin: 30px auto;
+    position: relative;
+    /* border:1px solid red; */
+}
+
+.nav-bg {
+    background: #fafafa;
+}
+
+.nav {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.nav .guider {
+    padding: 0;
+}
+
+.nav .guider>ul li {
+    padding: 0 22px 0 0;
+    line-height: 34px;
+    text-align: center;
+}
+
+.nav .guider>ul li a {
+    display: inline-block;
+    line-height: 34px;
+}
+
+.nav .guider>ul a:hover {
+    border-bottom: 2px solid darkred;
+}
+
+.nav .search {
+    padding: 0;
+}
+
+.nav .search span {
+    margin-right: 30px;
+    line-height: 36px;
+    position: relative;
+}
+
+.nav .search i {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+
+.nav .search span input {
+    height: 30px;
+    width: 300px;
+    border: none;
+    outline: none;
+    background: rgb(245, 245, 245);
+    padding: 0 0 0 20px;
+    font-size: 12px;
+    border-radius: 15px;
+}
+
+.slider {
+    width: 100%;
+    height: 448px;
+    position: relative;
+}
+
+.slider .dot {
+    width: fit-content;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -90px;
+}
+
+.slider .dot ul {
+    display: flex;
+}
+
+.slider .dot ul li {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.slider .dot a {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.current {
+    background: #fff;
+}
+
+/* 顶部导航 */
+
+.main {
+    width: 100%;
+    position: relative;
+}
+
+.gn-top-left, .gn-top-right {
+    /* border:1px solid red; */
+    display: inline-block;
+    line-height: 30px;
+    padding: 5px 12px 0 0;
+    font-size: 14px;
+}
+
+.gn-top-right ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.gn-top-right ul li a {
+    padding: 0 15px;
+}
+
+.gn-bottom {
+    /* border:1px solid red; */
+    font-size: 14px;
+    text-align: center;
+}
+
+.gn-bottom ul li {
+    float: left;
+    width: 120px;
+    height: 206px;
+    margin-right: 56px;
+    margin-bottom: 20px;
+}
+
+.gn-bottom ul li a {
+    display: inline-block;
+    /* border:1px solid red; */
+    padding: 10px 0;
+}
+
+.gn-bottom ul li a img {
+    margin-bottom: 15px;
+}
+
+.gn-bottom ul li:last-child {
+    margin-right: 0px;
+}
+
+.gn-bottom .price {
+    font-size: 14px;
+    margin-top: 5px;
+}
+/* 面包屑效果 */
+
+.path {
+    background-color: #fafafa;
+}
+
+.path .breadcrumb {
+    width: 1200px;
+    margin: 10px auto;
+    background-color: transparent;
+    padding: 10px 0;
+}

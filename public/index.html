@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SIDE7模型交易网</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="header d-flex">
+            <div class="logo d-flex">
+                <img src="./images/logo.jpg" alt="" width="40px" height="40px">
+                <h2>
+                    <span>SIDE7模型商城</span>
+                </h2>
+            </div>
+
+            <div class="fast d-flex">
+                <!-- <h4 class="activity">
+                    <a style="color:#fff;" href="javascripts:;" id="bannerNew">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </a>
+                </h4> -->
+                <h3 class="new-product d-flex">
+                    <span>
+                        <a href="#" id="bannerMG">MG模型新品
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="#" id="bannerPG">PG模型新品
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </h3>
+            </div>
+        </div>
+        <div class="banner">
+            <div class="top-banner">
+                <div class="banner-info">
+                    <h2 class="ls2 fs42">
+                        <b>PG</b>完 美 比 例 系 列</h2>
+                    <p class="ls6 text-right">SEED | MA MS多种模型</p>
+                    <h2 class="ls30 fs42 mt80">完美比例</h2>
+                    <p class="ls6">1:60经典比例</p>
+                    <h2 class="ls2 fs42 mt80">￥ 888 起</h2>
+                </div>
+            </div>
+            <div class="gift pt80">
+                <h2 class="text-center">
+                    OO新品首发 多重礼品OO
+                </h2>
+                <div class="list">
+                    <div class="gift-list row clearfix" id="giftList"></div>
+                    <script id="giftList_temp" type="text/html">
+                        {{each products p}}
+                        <div class="gl-item">
+                            <h3>{{p.name}}</h3>
+                            <h3 class="mt10 colred">{{p.jixie}}</h3>
+                            <div class="gl-detail">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="">
+                                </a> 
+                            </div>
+                        </div>
+                        {{/each}}
+                    </script>
+                    <span class="gift-more">
+                        <a href="./productList.html">更多商品 ></a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="content">
+            <!-- PG -->
+            <div class="pg-bg">
+                <div class="pg">
+                    <div class="title">
+                        <h2>
+                            <a href="./productList.html?seriesId=1">PG 系列</a>
+                        </h2>
+                    </div>
+                    <div class="top">
+                        <ul>
+                            <li>
+                                <a href="./productList.html?seriesId=1&type=奥布">奥布</a>
+                            </li>
+                            <li>
+                                <a href="./productList.html?seriesId=1&type=地球联合军">地球联合军</a>
+                            </li>
+                            <li>
+                                <a href="./productList.html?seriesId=1&type=ZAFT">ZAFT</a>
+                            </li>
+                            <li>
+                                <a href="./productList.html?seriesId=1&type=第三联盟">第三联盟</a>
+                            </li>
+                            <li>
+                                <a href="./productList.html?seriesId=1&type=MA">MA</a>
+                            </li>
+                        </ul>
+                        <div class="more">
+                            <a href="./productList.html?seriesId=1">更多
+                                <!-- <span></span> -->
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="pg-top" id="pgList"></div>
+                    <script id="pgList_temp" type="text/html">
+                        <ul>
+                            {{each products p i}}
+                                {{if i < 4}}
+                                <li>
+                                    <a href="./product.html?id={{p.id}}">
+                                        <img src="{{p.bigImg}}" alt="{{p.name}}">
+                                    </a>
+                                </li>
+                                {{/if}}
+                            {{/each}}
+                        </ul>
+                    
+                        <div class="pg-bottom" id="pgBottomList">
+                            {{each products p i}}
+                                {{if i >= 4}}
+                                <div class="items">
+                                    <a href="./product.html?id={{p.id}}"></a>
+                                    <img src="{{p.bigImg}}" alt="">
+                                    <div class="details">
+                                        <div>{{p.name}}</div>
+                                        <div>{{p.type}}</div>
+                                        <p>{{p.alter}}</p>
+                                        <p class="price">￥{{p.price}}</p>
+                                    </div>
+                                </div>
+                                {{/if}}
+                            {{/each}}
+                        </div>
+                    </script>
+                </div>
+            </div>
+            <!-- mg -->
+            <!-- <div class="mg-bg">
+                <div class="mg">
+                    <div class="title">
+                        <h2>MG 系列</h2>
+                        <div class="mg-top">
+                            <ul>
+                                <li>
+                                    <a href="./productList.html?seriesId=2&type=奥布">奥布</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=2&type=地球联合军">地球联合军</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=2&type=ZAFT">ZAFT</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=2&type=第三联盟">第三联盟</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=2&type=MA">MA</a>
+                                </li>
+                            </ul>
+                            <div class="more">
+                                <a href="./productList.html?seriesId=2">更多
+                                    <span></span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div> -->
+                    <div class="mg-middle" id="mgList"></div>
+                    <script id="mgList_temp" type="text/html">
+                        <ul class="clearfix">
+                            <li class="m1">
+                                <a href="./product.html?id={{products[0].id}}">
+                                    <img src="{{products[0].bigImg}}" alt="400 764" width="400px" height="747px">
+                                    <!-- <div class="details">
+                                        <div>{{products[0].name}}</div>
+                                        <p class="info">{{products[0].jixie}}</p>
+                                        <p class="price">￥{{products[0].price}}</p>
+                                    </div>
+                                 -->
+                                </a>
+                            </li>
+                            <li class="m2">
+                                <a href="./product.html?id={{products[1].id}}">
+                                    <img src="{{products[1].bigImg}}" alt="400 374" width="400px" height="374px">
+                                    <div class="details">
+                                        <div>{{products[1].name}}</div>
+                                        <p class="info">{{products[1].jixie}}</p>
+                                        <p class="price">￥{{products[1].price}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="m3">
+                                <a href="./product.html?id={{products[2].id}}">
+                                    <img src="{{products[2].bigImg}}" alt="401 374" width="401px" height="374px">
+                                    <div class="details">
+                                        <div>{{products[2].name}}</div>
+                                        <p class="info">{{products[2].jixie}}</p>
+                                        <p class="price">￥{{products[2].price}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="m4">
+                                <a href="./product.html?id={{products[3].id}}">
+                                    <img src="{{products[3].bigImg}}" alt="799 371" width="799px" height="371px">
+                                    <div class="last-details">
+                                        <div>{{products[3].name}}</div>
+                                        <p class="info">{{products[3].jixie}}</p>
+                                        <p class="price">￥{{products[3].price}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </script>
+                </div>
+            </div>
+            <div class="rg-bg">
+                <div class="rg">
+                    <div class="title">
+                        <h2>
+                            <a href="#">RG系列</a>
+                        </h2>
+                        <div class="rg-top">
+                            <ul>
+                                <li>
+                                    <a href="./productList.html?seriesId=3&type=奥布">奥布</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=3&type=地球联合军">地球联合军</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=3&type=ZAFT">ZAFT</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=3&type=第三联盟">第三联盟</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=3&type=MA">MA</a>
+                                </li>
+                            </ul>
+                            <div class="more">
+                                <a href="./productList.html?seriesId=3">更多
+                                    <!-- <span></span> -->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rg-middle clearfix" id="rgList"></div>
+                <script id="rgList_temp" type="text/html">
+                    <ul>
+                        {{each products p i}}
+                            {{if i == 0}}
+                            <li class="pb pb{{i + 1}}">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="{{p.jixie}}"> 
+                                </a>
+                            </li>
+                            {{else if i != 0}}
+                            <li class="pb pb{{i + 1}}">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="{{p.jixie}}"> </a>
+                                <div class="details">
+                                    <div>{{p.name}}</div>
+                                    <p class="price">￥{{p.price}}</p>
+                                </div>
+                            </li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </script>
+            </div>
+            <div class="sd-bg">
+                <div class="sd">
+                    <div class="title">
+                        <h2>
+                            <a href="#">SD系列</a>
+                        </h2>
+                        <div class="sd-top">
+                            <ul>
+                                <li>
+                                    <a href="./productList.html?seriesId=5&type=奥布">奥布</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=5&type=地球联合军">地球联合军</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=5&type=ZAFT">ZAFT</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=5&type=第三联盟">第三联盟</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=5&type=MA">MA</a>
+                                </li>
+                            </ul>
+                            <div class="more">
+                                <a href="./productList.html?seriesId=5">更多
+                                    <!-- <span></span> -->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sd-middle" id="sdMiddleList"></div>
+                <script id="sdMiddleList_temp" type="text/html">
+                        <ul class="clearfix">
+                            {{each products p i}}
+                            <li class="p p{{i + 1}}">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="291 290"> </a>
+                                <div class="details">
+                                    <div>{{p.name}}</div>
+                                    <p class="price">￥{{p.price}}</p>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </script>
+                    <!-- 轮播展示 -->
+                <!-- <div class="sd-bottom clearfix" id="sdBottomList"></div>
+                <script id="sdBottomList_temp" type="text/html">
+                        <ul class="clearfix">
+                            {{each products p}}
+                            <li class="move">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="">
+                                    <div class="details">
+                                        <div>{{p.name}}</div>
+                                        <p class="intro">{{p.jixie}}</p>
+                                        <p class="price">￥{{p.price}}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                        <div class="pre btn btn-sm btn-outline-secondary layui-btn-disabled">
+                            <span>
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </span>
+                        </div> -->
+                        <div class="next btn btn-sm btn-outline-secondary">
+                            <span>
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </script>
+            </div>
+            <div class="hg-bg">
+                <div class="hg">
+                    <div class="title">
+                        <h2>
+                            <a href="#">HG系列</a>
+                        </h2>
+                        <div class="hg-top">
+                            <ul>
+                                <li>
+                                    <a href="./productList.html?seriesId=4&type=奥布">奥布</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=4&type=地球联合军">地球联合军</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=4&type=ZAFT">ZAFT</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=4&type=第三联盟">第三联盟</a>
+                                </li>
+                                <li>
+                                    <a href="./productList.html?seriesId=4&type=MA">MA</a>
+                                </li>
+                            </ul>
+                            <div class="more">
+                                <a href="./productList.html?seriesId=4">更多
+                                    <!-- <span></span> -->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hg-middle" id="hgMiddleList"></div>
+                <script id="hgMiddleList_temp" type="text/html">
+                    <ul class="clearfix">
+                        {{each products p i}}
+                            {{if i == 0}}
+                            <li class="jj jj{{ i + 1 }}">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="291 592" width="291px" height="592px">
+                                </a>
+                            </li>
+                            {{else if i != 0}}
+                            <li class="jj jj{{ i + 1}}">
+                                <a href="./product.html?id={{p.id}}">
+                                    <img src="{{p.bigImg}}" alt="594 290" width="594px" height="290px"> </a>
+                                <div class="details">
+                                    <div>{{p.name}}</div>
+                                    <p class="price">￥{{p.price}}</p>
+                                </div>
+                            </li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>  
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getGifts(pageSize, pageNow, type, banner) {
+            $.get("/products/getProducts", { pageSize, pageNow, type }).done(data => {
+                // console.log(data);
+                if (banner == "PG") {
+                    $("#bannerPG").attr("href", "./product.html?id=" + data.products[0].id);
+                } else if (banner == "MG") {
+                    $("#bannerMG").attr("href", "./product.html?id=" + data.products[0].id);
+                } else {
+                    if (!type) {
+                        $("#giftList").html(template("giftList_temp", { products: data.products }))
+                        return;
+                    }
+                    if (type == "PG") {
+                        $("#pgList").html(template("pgList_temp", { products: data.products }));
+                        return;
+                    }
+                    if (type == "SD") {
+                        var product1 = data.products.filter(function (v, i) { return i < 6 })
+                        var product2 = data.products.filter(function (v, i) { return i >= 6 })
+                        $("#sdMiddleList").html(template("sdMiddleList_temp", { products: product1 }))
+                        $("#sdBottomList").html(template("sdBottomList_temp", { products: product2 }))
+                        return;
+                    }
+                    if (type == "MG") {
+                        $("#mgList").html(template("mgList_temp", { products: data.products }))
+                        return;
+                    }
+                    if (type == "RG") {
+                        $("#rgList").html(template("rgList_temp", { products: data.products }))
+                        return;
+                    }
+                    if (type == "HG") {
+                        $("#hgMiddleList").html(template("hgMiddleList_temp", { products: data.products }))
+                        return;
+                    }
+                }
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            // 头部导航
+            getGifts(1, 1, "PG", "PG");
+            getGifts(1, 1, "MG", "MG");
+            // 内容区
+            getGifts(4, 1, "", false);
+            getGifts(7, 1, "PG", false);
+            getGifts(13, 1, "SD", false);
+            getGifts(5, 1, "MG", false);
+            getGifts(6, 1, "RG", false);
+            getGifts(6, 1, "HG", false);
+
+            var i = 1;
+            var j = 1;
+            $("#sdBottomList").on("click", ".pre", function () {
+                var left = Number.parseInt($(".move").eq(0).css("left"));
+                if (left != 0) {
+                    $(".move").css("left", left + 240 + "px");
+                    $(".next").removeClass("layui-btn-disabled");
+                    return;
+                }
+                $(".pre").addClass("layui-btn-disabled");
+                $(".next").removeClass("layui-btn-disabled");
+            })
+            $("#sdBottomList").on("click", ".next", function () {
+                var left = Number.parseInt($(".move").eq(6).css("left"));
+                if (left != -240 * ($(".move").length - 5)) {
+                    $(".move").css("left", left - 240 + "px");
+                    $(".pre").removeClass("layui-btn-disabled");
+                    return;
+                }
+                $(".next").addClass("layui-btn-disabled");
+                $(".pre").removeClass("layui-btn-disabled");
+            })
+        })
+    </script>
+</body>
+
+</html>

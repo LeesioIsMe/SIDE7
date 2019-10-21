@@ -1,0 +1,161 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.hide {
+  display: none;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.ls2 {
+  letter-spacing: 2px;
+}
+
+.ls6 {
+  letter-spacing: 6px;
+}
+
+.ls10 {
+  letter-spacing: 10px;
+}
+
+.ls30 {
+  letter-spacing: 30px;
+}
+
+.colred {
+  color: red;
+}
+.coldarkred {
+  color: darkred;
+}
+
+.colblack {
+  color: #000;
+}
+
+.colyellow {
+  color: yellow;
+}
+
+.colgreen {
+  color: green;
+}
+
+.bgred {
+  background: red;
+}
+
+.bgdarkred {
+  background: darkred;
+}
+.bgtransparent{
+  background: transparent;
+}
+.bgblack {
+  background: #000;
+}
+
+.bgyellow {
+  background: yellow;
+}
+
+.bggreen {
+  background: green;
+}
+
+.fs12 {
+  font-size: 12px;
+}
+
+.fs14 {
+  font-size: 14px;
+}
+
+.fs18 {
+  font-size: 18px;
+}
+
+.fs24 {
+  font-size: 24px;
+}
+
+.fs42 {
+  font-size: 42px;
+}
+
+.fb {
+  font-weight: bold;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mt80 {
+  margin-top: 80px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.mr20 {
+  margin-right: 20px;
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.ml20 {
+  margin-left: 20px;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
+.pt80 {
+  padding-top: 80px;
+}
+
+.pb20 {
+  padding-bottom: 20px;
+}
+
+.relative {
+  position: relative;
+}
+
+.f-between {
+  justify-content: space-between;
+}

@@ -1,0 +1,26 @@
+html, body {
+    background: rgb(245, 245, 245);
+}
+.container{
+    padding:20px !important;
+}
+.price {
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+th,tr,td{
+    font-weight: normal;
+}
+.order-info{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.operations a{
+    display:block;
+    margin-bottom: 10px;
+}
+.set{
+    max-height: 80px;
+    overflow:hidden;
+}

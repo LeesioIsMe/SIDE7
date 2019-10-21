@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跳转页</title>
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/purl.min.js"></script>
+</head>
+
+<body>
+    <!-- 跳转到views中的product.ejs -->
+    <script>
+        var id = $.url().data.param.query.id;
+        location.href = "/products/getOne/" + id;
+    </script>
+</body>
+
+</html>

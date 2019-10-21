@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
+    <link rel="stylesheet" href="/stylesheets/product.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/purl.min.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="header clearfix">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="/index.html">首页</a>
+                </li>
+                <li>
+                    <a href="/productList.html">系列</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul id="userOperate">
+                <li>
+                    <a href="/login.html">请登录</a>
+                </li>
+                <li>
+                    <a href="/register.html">注册</a>
+                </li>
+                <li>
+                    <a href="/order.html">我的订单</a>
+                </li>
+                <li id="shop-car" class="shop-car">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <a href="/shopcar.html">购物车(0)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="nav-bg mt10">
+            <div class="nav clearfix d-flex f-between">
+                <div class="guider col-md-9">
+                    <ul class="d-flex">
+                        <li>
+                            <a class="down" href="/productList.html?seriesId=1">PG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="/productList.html?seriesId=2">MG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="/productList.html?seriesId=3">RG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="/productList.html?seriesId=4">HG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="/productList.html?seriesId=5">SD系列</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/index.html">首页</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/productList.html">系列</a>
+                </li>
+                <li class="breadcrumb-item active">产品</li>
+            </ol>
+        </div>
+    </div>
+    <div class="content">
+        <div class="product d-flex f-between">
+            <div class="pro-pic">
+                <div class="img-box">
+                    <img src="<%= p.bigImg %>" alt="">
+                </div>
+                <div class="img-bar d-flex mt20">
+                    <% if (p.img1) { %>
+                        <div>
+                            <img src="<%= p.img1 %>" alt="">
+                        </div>
+                        <% } %>
+                            <% if (p.img2) { %>
+                                <div>
+                                    <img src="<%= p.img2 %>" alt="">
+                                </div>
+                                <% } %>
+                                    <%  if (p.img3) { %>
+                                        <div>
+                                            <img src="<%= p.img3 %>" alt="">
+                                        </div>
+                                        <% } %>
+                                            <% if (p.img4) { %>
+                                                <div>
+                                                    <img src="<%= p.img4 %>" alt="">
+                                                </div>
+                                                <% } %>
+                                                    <% if (p.img5) { %>
+                                                        <div>
+                                                            <img src="<%= p.img5 %>" alt="">
+                                                        </div>
+                                                        <% } %>
+                </div>
+            </div>
+            <div class="pro-info fs12" id="proInfo">
+                <h3>
+                    <%= p.sname %>模型系列
+                        <%= p.type %>
+                            <%= p.psname %>
+                                <%= p.jixie %>&nbsp;&nbsp;
+                                    <%= p.name %>
+                </h3>
+                <h5 class="colred">开售时间：
+                    <%= p.createTime %>
+                </h5>
+                <div class="price">
+                    <dl class="d-flex">
+                        <dt>价格</dt>
+                        <dd class="coldarkred fs24">￥
+                            <%= p.price %>
+                        </dd>
+                    </dl>
+                    <dl class="d-flex">
+                        <dt>说明</dt>
+                        <!-- <dd class="tips">便宜50元</dd> -->
+                        <dd>
+                            <%= p.alter %>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="service mt20">
+                    <dl class="d-flex">
+                        <dt>服务说明</dt>
+                        <dd>
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 全国包邮，已免运费</dd>
+                        <dd>
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i> 由网站负责发货，并提供售后服务</dd>
+                    </dl>
+                    <dl class="d-flex">
+                        <dt>商品编码</dt>
+                        <dd>
+                            <%= p.id %>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="choose mt20">
+                    <div class="color">
+                        <dl class="d-flex">
+                            <dt>颜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色</dt>
+                            <dd>
+                                <% if ( p.color == 1) { %>
+                                    <span class="colorType bgtransparent"></span>原色</dd>
+                            <% } else if (p.color == 2) { %>
+                                <span class="colorType bgred"></span>红色</dd>
+                                <% } else if (p.color == 3) { %>
+                                    <span class="colorType bgblack"></span>黑色</dd>
+                                    <% } else if (p.color == 4) { %>
+                                        <span class="colorType bgyellow"></span>黄色</dd>
+                                        <% } else if (p.color == 5) { %>
+                                            <span class="colorType bggreen"></span>绿色</dd>
+                                            <% } %>
+                                                </dd>
+                                                <% if (p.count == 0) { %>
+                                                    <dd class="layui-btn-disabled"> 库存：
+                                                        <%= p.count %>
+                                                    </dd>
+                                                    <% } else if(p.count != 0) {%>
+                                                        <dd> 库存：
+                                                            <%= p.count %>
+                                                        </dd>
+                                                        <% } %>
+                        </dl>
+                    </div>
+                    <div class="size mt20">
+                        <dl class="d-flex">
+                            <dt>大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小</dt>
+                            <dd>比例为：
+                                <%= p.bili %> 约
+                                    <%= p.height %>cm</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="operate mt20">
+                    <div class="form-group d-flex" style="line-height:40px;">
+                        <input type="number" id="buyNum" class="form-control col-md-2" value="1">个
+                        <button type="button" id="buyNow" class="layui-btn layui-btn-disabled col-md-2 ml20 mr10">立即购买</button>
+                        <button type="button" id="addShopCar" class="layui-btn layui-btn-disabled col-md-2 btn-sm">加入购物车</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="detail mt20">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <!-- <div class="detail-bar-bg"> -->
+            <ul class="layui-tab-title text-center detail-bar" id="detail-bar">
+                <li class="layui-this mr20">
+                    <h3>
+                        <a href="#top" id="pro-tab-parameter">商品详情</a>
+                        <em></em>
+                    </h3>
+                </li>
+                <!-- <li class=" fs42">
+                    <h3>
+                        <a href="#pro-params" id="pro-tab-parameter">规格参数</a>
+                        <em></em>
+                    </h3>
+                </li> -->
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show" id="pro-detail">
+                    <div class="product-parameter-main clearfix hide" style="display: block;">
+                        <h2>主要内容</h2>
+                        <ul>
+                            <li>
+                                <label>名字</label>
+                                <span>
+                                    <%= p.name %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>图片</label>
+                                <span>
+                                    <img src="<%= p.bigImg %>" alt="" width="150px" height="150px">
+                                </span>
+                            </li>
+                            <li>
+                                <label>系列</label>
+                                <span>
+                                    <%= p.sname %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>颜色</label>
+                                <span>
+                                    <% if (p.color == 1) {%>
+                                        原色
+                                        <% } %>
+                                            <% if (p.color == 2) {%>
+                                                红色
+                                                <% } %>
+                                                    <% if (p.color == 3) {%>
+                                                        黑色
+                                                        <% } %>
+                                                            <% if (p.color == 4) {%>
+                                                                黄色
+                                                                <% } %>
+                                                                    <% if (p.color == 5) {%>
+                                                                        绿色
+                                                                        <% } %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>价格</label>
+                                <span>
+                                    <%= p.price %>元</span>
+                            </li>
+                            <li>
+                                <label>上市时间</label>
+                                <span>
+                                    <%= p.createTime %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>类型</label>
+                                <span>
+                                    <%= p.pstype %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>机械</label>
+                                <span>
+                                    <%= p.jixie %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>比例</label>
+                                <span>
+                                    <%= p.bili %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>高度</label>
+                                <span>
+                                    约
+                                    <%= p.height %>cm
+                                </span>
+                            </li>
+                            <li>
+                                <label>注释</label>
+                                <span>
+                                    <%= p.alter %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>设定</label>
+                                <span>
+                                    <%= p.set %>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-tab-item" id="pro-params">
+                    <div class="product-parameter-main d-flex clearfix">
+                        <h2>主体</h2>
+                        <ul>
+                            <li>
+                                <label>品牌</label>
+                                <span>万代BANDAI</span>
+                            </li>
+                            <li>
+                                <label>名称</label>
+                                <span>
+                                    <%= p.name %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>系列</label>
+                                <span>
+                                    <%= p.sname %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>类型</label>
+                                <span>
+                                    <%= p.pstype %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>机械</label>
+                                <span>
+                                    <%= p.jixie %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>比例</label>
+                                <span>
+                                    <%= p.bili %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>高度</label>
+                                <span>
+                                    约
+                                    <%= p.height %>cm
+                                </span>
+                            </li>
+                            <li>
+                                <label>注释</label>
+                                <span>
+                                    <%= p.alter %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>设定</label>
+                                <span>
+                                    <%= p.set %>
+                                </span>
+                            </li>
+                            <li>
+                                <label>机动战士高达</label>
+                                <span>《机动战士高达》自1979年登场以来，已成为日本动画作品中最著名、最经久不衰、最庞大、也是盈利最高的系列 。
+                                    《机动战士高达0079》与《宇宙战舰大和号》、《新世纪福音战士》（EVA）并称为日本科幻动画的3大里程碑。
+                                    万代（BANDAI）未正式进中国大陆销售前，Gundam在大陆的翻译受香港影响多翻译为“高达”，而万代进驻中国大陆销售时注册名字时发现“高达”一词已被注册，所以改名为“敢达”。</span>
+                            </li>
+                            <li>
+                                <label>Mobile Suit</label>
+                                <span>Mobile Suit为日系动画中机器人兵器角色的一类泛称，按英文原意可译为：可操控规则构造的工业劳动力扩展型宇宙战术效能化机械，而Mobile和Suit分别指“机动的”与“套装”，正好是由人操控的外延型机动套装之义，故些词可泛指”机动战士”。机动战士是日本真实系机器人系列动画《机动战士高达》的机器人角色的统称。而机动战士中的高达（GUNDAM）才是动画的主角性机器人。</span>
+                            </li>
+                            <li>
+                                <label>万代BANDAI</label>
+                                <span>万代是全日本最大的综合性娱乐公司之一，主要涉及娱乐、网络、动漫产品及其周边等。其生产的各种科幻、动漫模型的数量之多，品种之全是世界第一的。而最著名的则非GUNDAM（大陆译音“敢达”，香港译音“高达”，台湾译音“钢弹”）系列莫属。公司总部位于日本东京，于全球八个主要地区国家设有27家子公司。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <form id="buyForm" class="hide">
+        <input type="text" name="id" value="<%= p.id %>">
+        <input type="text" name="name" value="<%= p.name %>">
+        <input type="number" name="price" value="<%= p.price %>">
+        <input type="number" name="buyCount" value="" id="formCount">
+        <input type="number" name="count" value="<%= p.count %>" id="kucun">
+        <input type="text" name="color" value="<%= p.color %>">
+    </form>
+    </div>
+    <script>
+        var user = $.cookie("user");
+        if (user) {
+            var userType = JSON.parse(user).type;
+        }
+        if (checkLogin()) {
+            $("#buyNow").removeClass("layui-btn-disabled");
+            $("#addShopCar").removeClass("layui-btn-disabled");
+        }
+        function getOrderCount() {
+            $.get("/getOrderCount").done(data => {
+                console.log(data);
+                if (userType == 0) {
+                    $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="/order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="/shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+                    return;
+                }
+                $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="/order.html">我的订单</a>
+                    </li>
+                    <li id="cust-service" class="cust-service">
+                        <a href="/productManage.html">后台管理系统</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="/shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            if (user) {
+                getOrderCount();
+            }
+            var offsetTop = $("#detail-bar").offset().top;
+            window.onscroll = function () {
+                console.log(offsetTop)
+                if ($("body,html").scrollTop() >= offsetTop) {
+                    $("#detail-bar").css({
+                        position: "fixed"
+                    })
+                } else {
+                    $("#detail-bar").css({
+                        position: "relative"
+                    })
+                }
+            }
+            $(".img-bar div").each(function (i, v) {
+                $(v).click(function () {
+                    $(".img-box img").attr("src", $(this).children("img").attr("src"));
+                })
+            })
+            $(".color dd").each(function (i, v) {
+                $(v).click(function () {
+                    $(this).toggleClass("selected").siblings().removeClass("selected");
+                })
+            })
+            $(".size dd").each(function (i, v) {
+                $(v).click(function () {
+                    $(this).toggleClass("selected").siblings().removeClass("selected");
+                })
+            })
+            $("#addShopCar").click(function () {
+                if (!checkLogin()) {
+                    location.href = "/login.html";
+                    return;
+                }
+                if ($("#kucun").val() == 0) {
+                    layer.msg("不好意思，该商品售光了");
+                    return;
+                }
+                $("#formCount").val($("#buyNum").val())
+                $.post("/shopCar/addShopCar", $("#buyForm").serialize()).done(data => {
+                    console.log(data);
+                    if (data.code == 202) {
+                        location.href = "/login.html";
+                        return;
+                    }
+                    layer.msg("加购成功")
+                }).fail(err => {
+                    throw err;
+                })
+            });
+            $("#buyNum").click(function () {
+                console.log($(this).val())
+                if ($(this).val() - 0 >= $("#kucun").val() - 0) {
+                    // $(this).attr("disabled", true);
+                    $(this).val($("#kucun").val() - 0)
+                    layer.msg("已经达到最大数量了")
+                    return;
+                } else if ($(this).val() - 0 <= 0) {
+                    // $(this).attr("disabled", true);
+                    $(this).val(0)
+                    layer.msg("数量不能低于0")
+                    return;
+                }
+            })
+            $("#buyNow").click(function () {
+                if (!checkLogin()) {
+                    location.href = "/login.html";
+                    return;
+                }
+                if ($("#kucun").val() == 0) {
+                    layer.msg("不好意思，该商品售光了");
+                    return;
+                }
+                $("#formCount").val($("#buyNum").val())
+                $.post("/order/addOrder", $("#buyForm").serialize()).done(data => {
+                    console.log(data);
+                    if (data.code == 202) {
+                        location.href = "/login.html";
+                        return;
+                    }
+                    layer.msg("购买成功")
+                }).fail(err => {
+                    throw err;
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

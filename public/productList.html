@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SIDE7-产品</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
+    <link rel="stylesheet" href="/stylesheets/product.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/purl.min.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="head-bg">
+        <div class="header clearfix">
+            <div class="left">
+                <ul>
+                    <li>
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./productList.html">产品</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul id="userOperate">
+                    <li>
+                        <a href="./login.html">请登录</a>
+                    </li>
+                    <li>
+                        <a href="./register.html">注册</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(0)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="nav-bg mt10">
+            <div class="nav clearfix d-flex f-between">
+                <div class="guider col-md-9">
+                    <ul class="d-flex">
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=1">PG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=2">MG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=3">RG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=4">HG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=5">SD系列</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search col-md-3">
+                    <span>
+                        <input type="text" id="keywords" placeholder="">
+                        <i class="fa fa-search" aria-hidden="true" id="btnSearch"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="./index.html">首页</a>
+                </li>
+                <li class="breadcrumb-item active">系列</li>
+            </ol>
+        </div>
+        <div class="sort fs12">
+            <div class="type">
+                <dl>
+                    <dt>分类：</dt>
+                    <dd data-type="" class="selected">全部</dd>
+                    <dd data-type="奥布">奥布</dd>
+                    <dd data-type="地球联合军">地球联合军</dd>
+                    <dd data-type="ZAFT">ZAFT</dd>
+                    <dd data-type="第三联盟">第三联盟</dd>
+                    <dd data-type="MA">MA</dd>
+                </dl>
+            </div>
+            <!-- <div class="order">
+                <dl>
+                    <dt>排序：</dt>
+                    <dd class="selected" data-orderby="p.createTime">上架时间
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </dd>
+                    <dd data-orderby="p.price">价格
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </dd>
+                    <dd data-orderby="p.count">库存
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </dd>
+                </dl>
+            </div>
+        </div> -->
+        <div class="products mt20">
+            <div class="products-content">
+                <ul class="products-list clearfix" id="productsList"></ul>
+                <script id="productsList_temp" type="text/html">
+                    {{each products p}}
+                    <li class="products-item fs12">
+                        <div class="item-content mb20 mr20">
+                            <div class="item-img">
+                                <a href="./product.html?id={{p.id}}">
+                                    <p class="img-img">
+                                        <img src="{{p.bigImg}}" alt="">
+                                    </p>
+                                    <p class="img-title">
+                                        <span class="mb5">{{p.name}}</span>
+                                        <span class="jixie mb5" style="color:#ca141d;">{{p.jixie}}</span>
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="item-info">
+                                <p class="colred fs18">￥{{p.price}}</p>
+                                <p class="item-operate">
+                                    <button class="colred"><a href="./product.html?id={{p.id}}"> 选购</a></button>
+                                    <button>{{p.buyCount}}人购买</button>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </script>
+                <!-- <div class="more" id="btnLoadMore">
+                    
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        var user = $.cookie("user");
+        if (user) {
+            var userType = JSON.parse(user).type;
+        }
+        var seriesId = $.url().data.param.query.seriesId - 0;
+        var type = $.url().data.param.query.type || "";
+        var orderBy = "p.createTime";
+        var pageSize = 20;
+        var keywords = "";
+        var desc = true;
+        function getProducts(seriesId, orderBy, type, desc, keywords, pageSize) {
+            $.get("/products/getProductsList", { seriesId, orderBy, type, desc, keywords, pageSize }).done(function (data) {
+                console.log(data);
+                if (data.code != 200) {
+                    $("#productsList").html("<div class='text-center mt80'>数据为空</div>")
+                    return;
+                }
+                $("#productsList").html(template("productsList_temp", { products: data.products }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function getOrderCount() {
+            $.get("/getOrderCount").done(data => {
+                console.log(data);
+                // 判断用户类型，是否是管理员
+                if (userType == 0) {
+                    $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+                    return;
+                }
+                $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="cust-service" class="cust-service">
+                        <a href="./productManage.html">后台管理系统</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            if (user) {
+                getOrderCount();
+            }
+            getProducts(seriesId, orderBy, type, desc, keywords, pageSize);
+            $(".type dd").each(function (i, v) {
+                $(v).click(function () {
+                    type = $(v).data("type");
+                    $(this).addClass("selected").siblings().removeClass("selected")
+                    getProducts(seriesId, orderBy, type, desc, keywords, pageSize);
+                })
+            })
+            $(".sort dd").each(function (i, v) {
+                $(v).click(function () {
+                    if ($(v).hasClass("selected")) {
+                        desc = !desc;
+                    }
+                    if (desc) {
+                        $(v).children("i").addClass("fa-angle-down").removeClass("fa-angle-up")
+                    } else {
+                        $(v).children("i").addClass("fa-angle-up").removeClass("fa-angle-down")
+                    }
+                    orderBy = $(v).data("orderby");
+                    $(this).addClass("selected").siblings().removeClass("selected")
+                    getProducts(seriesId, orderBy, type, desc, keywords, pageSize);
+                })
+            })
+            // 显示更多
+            $("#btnLoadMore").click(function () {
+                pageSize = null;
+                getProducts(seriesId, orderBy, type, desc, pageSize);
+            })
+            $("#btnSearch").click(function () {
+                keywords = $("#keywords").val();
+                getProducts(seriesId, orderBy, type, desc, keywords, pageSize);
+            })
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>订单</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/shopcar.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="header clearfix">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="./index.html">首页</a>
+                </li>
+                <li>
+                    <a href="./productList.html">系列</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul id="userOperate">
+                <li>
+                    <a href="./login.html">请登录</a>
+                </li>
+                <li>
+                    <a href="./register.html">注册</a>
+                </li>
+                <li>
+                    <a href="./order.html">我的订单</a>
+                </li>
+                <li id="shop-car" class="shop-car">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <a href="./shopcar.html">购物车(0)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="nav-bg mt10">
+            <div class="nav clearfix d-flex f-between">
+                <div class="guider col-md-9">
+                    <ul class="d-flex">
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=1">PG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=2">MG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=3">RG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=4">HG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=5">SD系列</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="./index.html">首页</a>
+                </li>
+                <li class="breadcrumb-item active">订单</li>
+            </ol>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:400px;">商品</th>
+                    <th scope="col" class="text-center">单价/元</th>
+                    <th scope="col" class="text-center">数量</th>
+                    <th scope="col" class="text-center">实付/元</th>
+                    <th scope="col" class="text-center">订单状态及操作</th>
+                </tr>
+            </thead>
+            <tbody id="myContent"></tbody>
+            <script type="text/html" id="myContent_temp">
+                {{each opIdList opId i}}
+                    <tr class="fs14">
+                        <th scope="row">
+                            {{each orders o}}
+                                {{if o.opId == opId}}
+                                <div class="d-flex mt10">
+                                    <div class="order-img col-md-4">
+                                        <a href="./product.html?id={{o.productId}}">
+                                            <img src="{{o.bigImg}}" width="100px" height="100px" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="order-info col-md-8 d-flex">
+                                        <p class="order-title">
+                                            <a href="./product.html?id={{o.productId}}">
+                                                {{o.sname}}系列{{o.psname}}{{o.name}}
+                                            </a>
+                                        </p>
+                                        <p class="colred fs12">{{o.alter}} {{o.bili}} 约{{o.height}}cm</p>
+                                        <p class="order-id mt10" style="color:#999;max-height:50px;overflow: hidden;line-height: 1.2em;text-overflow:ellipsis;">{{o.set}}</p>
+                                    </div>
+                                </div>
+                                {{/if}}
+                            {{/each}}
+                        </th>
+                        <td class="text-center fb colred">
+                            {{each orders o}}
+                                {{if o.opId == opId}}
+                                    <p style="height:110px;line-height:100px;">￥{{o.price}}</p> 
+                                {{/if}}
+                            {{/each}}
+                        </td>
+                        <td class="text-center">
+                            {{each orders o}}
+                                {{if o.opId == opId}}
+                                <p style="height:110px;line-height:100px;">x {{o.ocount}}</p> 
+                                {{/if}}
+                            {{/each}}
+                        </td>
+                        <td class="text-center fb colred">
+                            {{each orders o}}
+                                {{if o.opId == opId}}
+                                <p style="height:110px;line-height:100px;">￥{{o.truePay}}</p> 
+                                {{/if}}
+                            {{/each}}
+                        </td>
+                        <td class="text-center operations ">
+                            <p class="order-id mt10 mb20">订单编号：{{opId}}</p>
+                            <a href="javascript:;">
+                                <span class="colred">订单总额：{{priceList[i]}}</span>
+                            </a>
+                            <a href="javascript:;">
+                                <span>交易完成</span>
+                            </a>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="deleteOrder('{{opId}}')">删除订单</button>
+                        </td>
+                    </tr>
+                {{/each}}
+            </script>
+        </table>
+    </div>
+    <script>
+        var user = $.cookie("user");
+        if (!user) {
+            location.href = "./login.html"
+        }else{
+            var userType = JSON.parse(user).type;
+        }
+        function arrayNoRepeat(arr) {
+            var newArr = [];
+            arr.forEach(e => {
+                if (newArr.indexOf(e) == -1) {
+                    newArr.push(e)
+                }
+            })
+            return newArr;
+        }
+        function getOrder() {
+            $.get("/order/getOrders").then((data) => {
+                console.log(data);
+                if (data.code == 202) {
+                    location.href = "./login.html"
+                    return;
+                }
+                if (data.code != 200) {
+                    $("#myContent").html("<tr class='text-center mt80'><td colspan='6'>购物车还没有添加东西，快去<a href='./productList.html' class='colred'>选购吧</a></td></tr>")
+                    return;
+                }
+                var opIdList = [];
+                opIdList = data.orders.map(function (v, i) {
+                    return v.opId
+                })
+                var priceList = [];
+                priceList = data.orders.map(function (v, i) {
+                    return v.totalPrice
+                })
+                opIdList = arrayNoRepeat(opIdList);
+                $("#myContent").html(template("myContent_temp", { orders: data.orders, opIdList, priceList }))
+            }, (err) => {
+                throw err;
+            })
+        }
+
+        function deleteOrder(id) {
+            $.post("/order/deleteOrder", { id }).done((data) => {
+                console.log(data);
+                if (data.code != 200) {
+                    layer.msg("系统错误，请稍后再试");
+                    return;
+                }
+                layer.msg("删除成功")
+                getOrder();
+            })
+        }
+        function getOrderCount() {
+            $.get("/getOrderCount").done(data => {
+                console.log(data);
+                if (userType == 0) {
+                    $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+                    return;
+                }
+                $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="cust-service" class="cust-service">
+                        <a href="./productManage.html">后台管理系统</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            if (user) {
+                getOrderCount();
+            }
+            getOrder();
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="/stylesheets/manage.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/shopcar.css">
+    <link rel="stylesheet" href="/stylesheets/product.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.validate.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary bd-navbar">
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-home fs25"></i>SIDE7模型交易网后台管理</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            </ul>
+            <form>
+                <button class="btn btn-primary" onclick="logout()">
+                    <i class="fa fa-window-close"></i>注销</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container-fluid pt20 clearfix">
+        <div class="left float-left">
+            <div id="menu" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                    <div class="card-header" role="tab" id="h1">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#menu" href="#c1" aria-expanded="true" aria-controls="c1">
+                                <i class="fa fa-bars"></i>功能列表
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="c1" class="collapse show" role="tabpanel" aria-labelledby="h1">
+                        <div class="card-body nopd">
+                            <ul class="list-group">
+                                <li class="list-group-item active">
+                                    <a href="usersManage.html">
+                                        <i class="fa fa-user"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="productManage.html">
+                                        <i class="fa fa-university"></i>商品管理
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="productSale.html">
+                                        <i class="fa fa-university"></i>商品上架
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right float-right pb20">
+            <div class="box"></div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>账号</th>
+                        <th>密码</th>
+                        <th>是否是管理员</th>
+                        <th>注册时间</th>
+                        <th>管理</th>
+                    </tr>
+                </thead>
+                <tbody id="myContent"></tbody>
+                <script type="text/html" id="myContent_temp">
+                    {{each users u}}
+                    <tr>
+                        <td style="width:250px">{{u.loginName}}</td>
+                        <td style="width:250px"><input id="{{u.id}}toggle" type="password" style="outline:none;border:none;background:#fff;" disabled  value="{{u.password}}"></td>
+                        <td style="width:250px">{{u.type?"是":"否"}}</td>
+                        <td style="width:250px">{{u.createTime | dateFormat "yyyy-MM-dd"}}</td>
+                        <td style="width:350px">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteUser({{u.id}})">删除用户</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="showPassword({{u.id}})" id="btn{{u.id}}">查看密码</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" onclick="changePassword({{u.id}})" data-toggle="modal" data-target="#editModal">修改密码</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </script>
+            </table>
+        </div>
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">价格调整</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">新密码</label>
+                            <input type="text" class="form-control" name="" id="password1" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">再次输入密码</label>
+                            <input type="text" class="form-control" name="" id="password2" aria-describedby="helpId" placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="btnSubmit">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        if(!checkLogin()){
+            location.href = "./login.html"
+        }
+        function getUsers() {
+            $.get("/users/getUsers").done(data => {
+                console.log(data);
+                if (data.code != 200) {
+                    $("#myContent").html("<tr class='text-center mt80'><td colspan='6'>还没有用户</td></tr>")
+                    return;
+                }
+                $("#myContent").html(template("myContent_temp", { users: data.users }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function showPassword(id) {
+            console.log(id)
+            var type = $("#" + id + "toggle").attr("type");
+            if (type == "password") {
+                $("#" + id + "toggle").attr("type", "text")
+                $("#btn" + id).text("隐藏密码")
+            } else {
+                $("#" + id + "toggle").attr("type", "password")
+                $("#btn" + id).text("显示密码")
+            }
+        }
+        function deleteUser(id) {
+            $.post("/users/deleteUser/" + id).done(data => {
+                console.log(data);
+                if (data.code != 200) {
+                    layer.msg("出错了")
+                    return;
+                }
+                layer.msg("删除成功")
+                getUsers();
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function changePassword(id) {
+            $("#editModal").on("show.bs.modal", function () {
+                $("#btnSubmit").click(function () {
+                    var password1 = $("#password1").val()
+                    var password2 = $("#password2").val()
+                    if (password1 != password2) {
+                        layer.msg("两次密码不一致");
+                        return;
+                    }
+                    $.post("/users/editUser/" + id, { password: password1 }).done(data => {
+                        console.log(data);
+                        if (data.code != 200) {
+                            layer.msg("出错了")
+                            return;
+                        }
+                        layer.msg("修改成功")
+                        getUsers();
+                    }).fail(err => {
+                        throw err;
+                    })
+                })
+            })
+        }
+        $(function () {
+            getUsers();
+        })
+    </script>
+</body>
+
+</html>

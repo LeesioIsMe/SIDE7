@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/stylesheets/shopcar.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <div class="header clearfix">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="./index.html">首页</a>
+                </li>
+                <li>
+                    <a href="./productList.html">系列</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul id="userOperate">
+                <li>
+                    <a href="./login.html">请登录</a>
+                </li>
+                <li>
+                    <a href="./register.html">注册</a>
+                </li>
+                <li>
+                    <a href="./order.html">我的订单</a>
+                </li>
+                <li id="shop-car" class="shop-car">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <a href="./shopcar.html">购物车(0)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="nav-bg mt10">
+            <div class="nav clearfix d-flex f-between">
+                <div class="guider col-md-9">
+                    <ul class="d-flex">
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=1">PG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=2">MG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=3">RG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=4">HG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=5">SD系列</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="./index.html">首页</a>
+                </li>
+                <li class="breadcrumb-item active">购物车</li>
+            </ol>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">编号</th>
+                    <th scope="col" style="width:400px;">商品</th>
+                    <th scope="col" class="text-center">单价</th>
+                    <th scope="col" class="text-center">数量</th>
+                    <th scope="col" class="text-center">小计</th>
+                    <th scope="col" class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="myContent"></tbody>
+            <script id="myContent_temp" type="text/html">
+                {{each shopCar s}}
+                <tr class="fs14">
+                    <th scope="row">
+                        <input type="checkbox" id="{{s.id}}check" class="selectSingle" data-color="{{s.color}}" data-name="{{s.name}}" data-pid="{{s.productId}}" data-id="{{s.id}}" data-price="{{s.price}}" data-count="{{s.count}}" onclick="checkThis(this)">
+                        <a href="./product.html?id={{s.productId}}">
+                            <img src="{{s.bigImg}}" alt="" class="ml20" width="100px" height="100px">
+                        </a>
+                    </th>
+                    <td style="width:400px;">
+                        <p><a href="./product.html?id={{s.productId}}">{{s.name}}</a></p>
+                        <p class="set">
+                            {{s.set.substr(0,100)}}...
+                        </p>
+                    </td>
+                    <td class="text-center fb colred">￥{{s.price}}</td>
+                    <td class="text-center">
+                        <p style="position: relative;display:inline-block;">
+                            <span class="countOne" style="display:inline-block;width:70px;height: 50px;color:#333;font-size: 18px;padding:0 0 0 5px;" id="{{s.id}}count">{{s.count}}</span>
+                        </p>
+                    </td>
+                    <td class="text-center fb colred">￥{{s.count * s.price}}</td>
+                    <td class="hide"><input type="text" class="priceOne" value="{{s.count * s.price}}"></td>
+                    <td class="text-center">
+                        <a href="javascript:;" data-id="{{s.id}}" class="btnDeleteSingle">删除</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </script>
+        </table>
+        <div class="operate d-flex f-between">
+            <div class="operate-del d-flex">
+                <div class="btn-group d-flex" style="align-items: center;cursor: pointer;">
+                    <input type="checkbox" name="" class="selectAll ml10" id="selectAll" autocomplete="off" style="position: relative;top:-3px;">
+                    <label for="selectAll">全选</label>
+                </div>
+                <div class="btn-group ml20" style="align-items: center" id="btnDeleteGroup">
+                    <label style="cursor: pointer;">
+                        删除
+                    </label>
+                </div>
+            </div>
+            <div class="operate-submit d-flex f-between">
+                <div class="price mr20 d-flex">
+                    <div>
+                        总计：
+                        <span class="total-price fb fs18 colred" id="totalPrice">￥0</span>
+                    </div>
+
+                    <div class="fs12">
+                        已选择
+                        <span class="total-price fb fs18 colred" id="totalCount">0</span>件商品
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger btn-lg" id="btnBuy">
+                        立即结算
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var user = $.cookie("user");
+        if (user) {
+            var userType = JSON.parse(user).type;
+        }
+        var totalCount = 0;
+        var totalPrice = 0;
+        var shopCar = [];
+        // 设置全不选
+        function setFalse() {
+            shopCar = [];
+            $(".selectSingle").each(function (i, v) {
+                $(v).prop("checked", false);
+                checkThis(v);
+            })
+        }
+        // 设置全选
+        function setTrue() {
+            shopCar = [];
+            $(".selectSingle").each(function (i, v) {
+                $(v).prop("checked", true);
+                checkThis(v);
+            })
+        }
+        // 点击全选按钮，判断是否全选
+        function selectAll(e) {
+            if ($(e).prop("checked")) {
+                setTrue();
+            } else {
+                setFalse();
+            }
+        }
+        // 拉取购物车
+        function getShopCar() {
+            $.get("/shopCar/getShopCar").done(data => {
+                // console.log(data);
+                if (data.code == 202) {
+                    location.href = "./login.html"
+                    return;
+                }
+                if (data.shopCar.length == 0) {
+                    $("#myContent").html("<tr class='text-center mt80'><td colspan='6'>购物车还没有添加东西，快去<a href='./productList.html' class='colred'>选购吧</a></td></tr>")
+                    return;
+                }
+                $("#myContent").html(template("myContent_temp", { shopCar: data.shopCar }))
+                // 在渲染完成后绑定删除事件
+                $(".btnDeleteSingle").each(function (i, v) {
+                    $(v).click(function () {
+                        deleteShopCar($(v).data("id"))
+                    })
+                })
+            }).fail(err => {
+                throw err;
+            })
+        }
+        // 点击复选框时候判断是否选中，选中的话在数组中添加一条记录，便于后边计算总价
+        function checkThis(e) {
+            // console.log(e);
+            var price = $(e).data("price")
+            var count = $(e).data("count")
+            var id = $(e).data("id")
+            var name = $(e).data("name")
+            var productId = $(e).data("pid")
+            var color = $(e).data("color")
+            if (!$(e).prop("checked")) {
+                // console.log("aa")
+                var index = shopCar.findIndex(function (v, i) {
+                    return v.id == id && v.productId == productId && v.color == color && v.price == price && v.count == count && v.name == name
+                })
+                shopCar.splice(index, 1);
+            } else {
+                shopCar.push({
+                    price,
+                    count,
+                    id,
+                    productId,
+                    color,
+                    name
+                })
+            }
+            console.log(shopCar)
+            calc();
+        }
+        // 计算总价
+        function calc() {
+            totalPrice = 0;
+            totalCount = 0;
+            shopCar.forEach(function (v, i) {
+                totalCount += v.count;
+                totalPrice += v.count * v.price;
+            })
+            $("#totalCount").text(totalCount);
+            $("#totalPrice").text(totalPrice);
+        }
+
+        function deleteShopCar(id) {
+            $.post("/shopCar/deleteShopCar", { id }).done(data => {
+                if (data.code != 200) {
+                    layer.msg("操作失败");
+                    return;
+                }
+                layer.msg("删除成功")
+                getShopCar();
+            })
+        }
+        function deleteShopCarGroup() {
+            var idGroup = shopCar.map(function (v, i, arr) {
+                return v.id
+            })
+            // console.log(idGroup)
+            $.post("/shopCar/deleteShopCarGroup", { idGroup: idGroup.join(",") }).done(data => {
+                if (data.code != 200) {
+                    layer.msg("操作失败");
+                    return;
+                }
+                layer.msg("删除成功")
+                getShopCar();
+            })
+        }
+        function buy() {
+            console.log(JSON.stringify(shopCar));
+            if (shopCar.length == 0 || !shopCar) {
+                layer.msg("您还没有选择商品");
+                return;
+            }
+            $.post("/order/addOrderGroup", { orderGroup: JSON.stringify(shopCar) }).done(data => {
+                // console.log(data);
+                if (data.code != 200) {
+                    layer.msg("系统出错，暂时无法购买")
+                    return;
+                }
+                layer.msg("购买成功")
+                location.href = "./order.html"
+                deleteShopCarGroup();
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function getOrderCount() {
+            $.get("/getOrderCount").done(data => {
+                console.log(data);
+                if (userType == 0) {
+                    $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+                    return;
+                }
+                $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="cust-service" class="cust-service">
+                        <a href="./productManage.html">后台管理系统</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            if (user) {
+                getOrderCount();
+            }
+            getShopCar();
+            $(".selectAll").click(function () {
+                selectAll(this);
+            })
+            $("#btnDeleteGroup").click(function () {
+                deleteShopCarGroup();
+            })
+            $("#btnBuy").click(function () {
+                buy();
+            })
+        })
+    </script>
+</body>
+
+</html>

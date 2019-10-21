@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品上架登记</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/header.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+    <style>
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label,
+        .selecter label {
+            display: inline-block;
+            width: 60px;
+            height: 40px;
+            line-height: 40px;
+            text-align: justify;
+            text-justify: inter-cluster;
+            margin-right: 20px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .form-group label:after,
+        .selecter label:after {
+            content: '.';
+            width: 100%;
+            display: inline-block;
+            overflow: hidden;
+            height: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header clearfix">
+        <div class="left">
+            <ul>
+                <li>
+                    <a href="./index.html">首页</a>
+                </li>
+                <li>
+                    <a href="./productList.html">系列</a>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul id="userOperate">
+                <li>
+                    <a href="./login.html">请登录</a>
+                </li>
+                <li>
+                    <a href="./register.html">注册</a>
+                </li>
+                <li>
+                    <a href="./order.html">我的订单</a>
+                </li>
+                <li id="shop-car" class="shop-car">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <a href="./shopcar.html">购物车(0)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div class="nav-bg mt10">
+            <div class="nav clearfix d-flex f-between">
+                <div class="guider col-md-9">
+                    <ul class="d-flex">
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=1">PG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=2">MG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=3">RG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=4">HG系列</a>
+                        </li>
+                        <li>
+                            <a class="down" href="./productList.html?seriesId=5">SD系列</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="path">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="./index.html">首页</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="./productManage.html">后台管理系统</a>
+                </li>
+                <li class="breadcrumb-item active">上架</li>
+            </ol>
+        </div>
+    </div>
+    <div class="container">
+        <form id="product" class="clearfix">
+            <div class="form-group">
+                <label for="">名称</label>
+                <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group" style="height:150px;">
+                <label for="">大图</label>
+                <div id="uploadBigImg">
+                    <div id="fileList" class="uploader-list" style="position: relative;"></div>
+                    <div id="filePicker1">选择图片</div>
+                    <button type="button" class="btn btn-outline-primary btn-md" onclick="bigImg = [];i=1;$('#bigImg').val(bigImg);$('#fileList').html('');layer.msg('重置成功')">重置图片</button>
+                </div>
+                <input type="text" id="bigImg" class="hide" name="bigImg" value="">
+            </div>
+            <div class="d-flex selecter">
+                <div class="form-group col-md-3" style="padding:0;">
+                    <label for="">系列</label>
+                    <select name="series" id="" class="form-control ml20">
+                        <option value="1">PG</option>
+                        <option value="2">MG</option>
+                        <option value="3">RG</option>
+                        <option value="4">HG</option>
+                        <option value="5">SD</option>
+                    </select>
+                </div>
+                <div class="form-group ml20 col-md-3" style="padding:0;">
+                    <label for="">颜色</label>
+                    <select name="color" id="" class="form-control col-md-8">
+                        <option value="1">原色</option>
+                        <option value="2">红色</option>
+                        <option value="3">黑色</option>
+                        <option value="4">黄色</option>
+                        <option value="5">绿色</option>
+                    </select>
+                </div>
+                <div class="form-group ml20 col-md-2" style="padding:0;">
+                    <label for="">价格</label>
+                    <input type="text" class="form-control" name="price" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="form-group ml20 col-md-2" style="padding:0;">
+                    <label for="">库存</label>
+                    <input type="text" class="form-control" name="count" id="" aria-describedby="helpId" placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">设定</label>
+                <textarea type="text" class="form-control" name="set" id=""> </textarea>
+            </div>
+            <div class="d-flex">
+                <div class="form-group">
+                    <label for="">类型</label>
+                    <input type="text" class="form-control" name="type" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="form-group ml20">
+                    <label for="">机械</label>
+                    <input type="text" class="form-control" name="jixie" id="" aria-describedby="helpId" placeholder="">
+                </div>
+            </div>
+
+            <button type="button" id="btnSubmit" class="btn btn-outline-primary pull-right">确定</button>
+        </form>
+    </div>
+    <script>
+        if (!checkLogin()) {
+            location.href = "./login.html"
+        }
+        var user = $.cookie("user");
+        if (user) {
+            var userType = JSON.parse(user).type;
+        }
+        var bigImg = [];
+        var BASE_URL = "http://localhost:3000"
+        var i = 1;
+        var uploader = WebUploader.create({
+            auto: true,
+            swf: BASE_URL + '/js/Uploader.swf',
+            server: BASE_URL + '/products/upload',
+            pick: '#filePicker1',
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            }
+        });
+        uploader.on('uploadSuccess', function (file, response) {
+            $('#' + file.id).addClass('upload-state-done');
+            bigImg.push(response.bigImg);
+            $("#bigImg").val(bigImg.join(","));
+        });
+        uploader.on('uploadError', function (file) {
+            var $li = $('#' + file.id),
+                $error = $li.find('div.error');
+            if (!$error.length) {
+                $error = $('<div class="error"></div>').appendTo($li);
+            }
+
+            $error.text('上传失败');
+        });
+        uploader.on('uploadComplete', function (file) {
+            $('#' + file.id).find('.progress').remove();
+        });
+        uploader.on('fileQueued', function (file) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail" style="position:absolute;left:' + i * 110 + 'px;top:-30px;">' +
+                '<img>' +
+                '</div>'
+            ),
+                $img = $li.find('img');
+
+            // $list为容器jQuery实例
+            $("#fileList").append($li);
+            i++;
+            // 创建缩略图
+            // 如果为非图片文件，可以不用调用此方法。
+            // thumbnailWidth x thumbnailHeight 为 100 x 100
+            uploader.makeThumb(file, function (error, src) {
+                if (error) {
+                    $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                $img.attr('src', src);
+            }, 100, 100);
+        });
+        function getOrderCount() {
+            $.get("/getOrderCount").done(data => {
+                console.log(data);
+                if (userType == 0) {
+                    $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+                return;
+                }
+                $("#userOperate").html(`
+                    <li>
+                        <a href="javascript:;" onclick="logout()">退出</a>
+                    </li>
+                    <li>
+                        <a href="./order.html">我的订单</a>
+                    </li>
+                    <li id="cust-service" class="cust-service">
+                        <a href="./productManage.html">后台管理系统</a>
+                    </li>
+                    <li id="shop-car" class="shop-car">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <a href="./shopcar.html">购物车(${data.count})</a>
+                    </li>
+                `)
+            }).fail(err => {
+                throw err;
+            })
+        }
+        $(function () {
+            if (user) {
+                getOrderCount();
+            }
+            $("#btnSubmit").click(function () {
+                $.post("/products/forsale", $("#product").serialize()).then(function (data) {
+                    console.log(data);
+                    if (data.code == 202) {
+                        location.href = "./login.html"
+                        return;
+                    }
+                    if (data.code != 200) {
+                        layer.msg(data.message)
+                        return;
+                    }
+                    layer.msg("商品发售成功")
+                }, function (err) {
+                    throw err;
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

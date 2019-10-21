@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品管理</title>
+    <link rel="stylesheet" href="/stylesheets/manage.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/shopcar.css">
+    <link rel="stylesheet" href="/stylesheets/product.css">
+    <link rel="stylesheet" href="/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="/libs/layui/css/layui.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/webuploader/webuploader.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/libs/jquery.validate.js"></script>
+    <script src="/libs/jquery.cookie.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/layui/layui.all.js"></script>
+    <script src="/libs/template-web.js"></script>
+    <script src="/javascripts/common.js"></script>
+    <script src="/libs/webuploader/webuploader.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary bd-navbar">
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-home fs25"></i>SIDE7模型交易网后台管理</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            </ul>
+            <form class="form-inline">
+                <button class="btn btn-primary" onclick="logout()">
+                    <i class="fa fa-window-close"></i>注销</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container-fluid pt20 clearfix">
+        <div class="left float-left">
+            <div id="menu" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                    <div class="card-header" role="tab" id="h1">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" data-parent="#menu" href="#c1" aria-expanded="true" aria-controls="c1">
+                                <i class="fa fa-bars"></i>功能列表
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="c1" class="collapse show" role="tabpanel" aria-labelledby="h1">
+                        <div class="card-body nopd">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="usersManage.html">
+                                        <i class="fa fa-user"></i>用户管理
+                                    </a>
+                                </li>
+                                <li class="list-group-item active">
+                                    <a href="productManage.html">
+                                        <i class="fa fa-university"></i>商品管理
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="productSale.html">
+                                        <i class="fa fa-university"></i>商品上架
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right float-right pb20">
+            <div class="box"></div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>商品</th>
+                        <th>图片</th>
+                        <th>类型</th>
+                        <th>系列</th>
+                        <th>机械</th>
+                        <th>设定</th>
+                        <th>库存</th>
+                        <th>单价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="myContent"></tbody>
+                <script type="text/html" id="myContent_temp">
+                    {{each products p}}
+                    <tr class="fs12">
+                        <td style="width:80px;">{{p.name}}</td>
+                        <td style="width:100px;">
+                            <img src="{{p.bigImg}}" width="100px" height="100px;" alt="">
+                        </td>
+                        <td style="width:110px;">{{p.type}}</td>
+                        <td style="width:30px;">{{p.sname}}</td>
+                        <td style="width:70px;">{{p.jixie}}</td>
+                        <td style="width:400px;">
+                            <p style="font-size:12px;line-height: 1.4em;max-height:100px;width:400px;overflow: hidden;text-overflow: ellipsis;">
+                                {{p.set}}
+                            </p>
+                        </td>
+                        <td style="width:30px;">{{p.count}}</td>
+                        <td style="width:30px;">{{p.price}}</td>
+                        <td style="width:50px;">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="edit('{{p.id}}','status')">下架</button>
+                            <button type="button" class="btn btn-danger btn-sm mt10" onclick="edit('{{p.id}}','price')" data-toggle="modal" data-target="#editModal">调价</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </script>
+            </table>
+            <div class="more" id="btnLoadMore">
+                显示更多
+            </div>
+        </div>
+        <!-- 模态框 -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">价格调整</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">调整后的价格:</label>
+                            <input type="text" class="form-control" name="" id="judgePrice" aria-describedby="helpId" placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="btnSubmit">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var desc = true;
+        var lookMore = true;
+        if (!checkLogin()) {
+            location.href = "./login.html"
+        }
+        function getProducts(pageSize, pageNow) {
+            $.get("/products/getProductsList", { pageSize, pageNow, desc: true }).done(function (data) {
+                console.log(data);
+                if (data.code != 200) {
+                    $("#myContent").html("<tr class='text-center mt80'><td colspan='6'>购物车还没有添加东西，快去<a href='./productList.html' class='colred'>选购吧</a></td></tr>")
+                    return;
+                }
+                $("#myContent").html(template("myContent_temp", { products: data.products }))
+            }).fail(err => {
+                throw err;
+            })
+        }
+        function edit(id, type) {
+            if (type == "status") {
+                $.post("/products/editProduct", { id }).done(function (data) {
+                    if (data.code == 202) {
+                        location.href = "./login.html";
+                        return;
+                    }
+                    if (data.code != 200) {
+                        layer.msg("系统错误，请稍后再试");
+                        return;
+                    }
+                    layer.msg("成功下架");
+                    getProducts(20, 1)
+                }).fail(err => {
+                    throw err;
+                })
+                return;
+            }
+            $("#editModal").on("show.bs.modal", function () {
+                $("#btnSubmit").click(function () {
+                    console.log($("#judgePrice").val())
+                    $.post("/products/editProduct", { id, price: $("#judgePrice").val() }).done(data => {
+                        if (data.code == 202) {
+                            location.href = "./login.html";
+                            return;
+                        }
+                        if (data.code != 200) {
+                            layer.msg("系统错误，请稍后再试");
+                            return;
+                        }
+                        layer.msg("商品价格已调整");
+                        getProducts(20, 1)
+                    }).fail(err => {
+                        throw err;
+                    })
+                    $("#editModal").modal("hide");
+                })
+            })
+        }
+        $(function () {
+            getProducts(20, 1)
+            $("#btnLoadMore").click(function(){
+                getProducts(null, 1)
+            })
+        })
+    </script>
+</body>
+
+</html>
